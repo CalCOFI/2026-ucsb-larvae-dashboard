@@ -9,8 +9,8 @@ library(here)
 
 # ── Constants ──────────────────────────────────────────────────────────────────
 
-GCS_BUCKET    <- "calcofi-data-lake"
-GCS_OBJECT    <- "staging/ichthyoplankton_observations.parquet"
+GCS_BUCKET    <- "calcofi-projects"  # "calcofi-data-lake"
+GCS_OBJECT    <- "2026-ucsb-capstone/staging_ichthyoplankton_observations.parquet"  # "staging/ichthyoplankton_observations.parquet"
 LOCAL_PARQUET <- file.path(tempdir(), "ichthyoplankton_observations.parquet")
 
 # ── GCS Authentication ─────────────────────────────────────────────────────────
