@@ -6,6 +6,10 @@ build_ui <- function(config, data_result, habitat_lookup = NULL) {
   shiny::fluidPage(
     title = config$app$title,
     shiny::tags$head(
+      # GA4 — the snippet shared by every CalCOFI app. GENERATED into
+      # google-analytics.html by calcofi4r::cc_ga_html() (see the banner in the
+      # file) rather than called at runtime, so this app takes on no dependency.
+      shiny::includeHTML("google-analytics.html"),
       shiny::tags$link(rel = "preconnect", href = "https://fonts.googleapis.com"),
       shiny::tags$link(rel = "stylesheet",
         href = "https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap"),
