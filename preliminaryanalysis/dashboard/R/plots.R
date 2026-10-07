@@ -951,8 +951,11 @@ spatialMapServer <- function(id, state, config) {
     output$map <- leaflet::renderLeaflet({
       pd <- station_data(); shiny::req(nrow(pd) > 0)
 
+      # CARTO's raster tiles draw "API KEY REQUIRED" since Sep 2026; cc_vector_basemap()
+      # draws the same Positron from CARTO's vector tiles
       base <- leaflet::leaflet(pd) |>
-        leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron)
+        leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron) |>
+        calcofi4r::cc_vector_basemap()
 
       if (input$map_mode == "line") {
         pal <- leaflet::colorNumeric("viridis", domain = pd$s_l, na.color = "#808080")
@@ -1048,6 +1051,7 @@ build_spatial_leaflet <- function(state, config) {
 
   leaflet::leaflet(station_data) |>
     leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron) |>
+    calcofi4r::cc_vector_basemap() |>
     leaflet::addCircleMarkers(
       lng         = ~longitude,
       lat         = ~latitude,
